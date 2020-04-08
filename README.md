@@ -1,2 +1,2 @@
-# LinuxConfigAndScripts
-Configuration and scripts used to configuration Linux systems.
+# SysAdminConfigAndScripts
+Configuration content and scripts for setting up new systems.
