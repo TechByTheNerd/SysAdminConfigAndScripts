@@ -23,7 +23,7 @@ This is a custom script that:
 
 This is set up as a cron job that runs every 12 hours. That crontab looks like this, by the way:
 
-```text
+```text++
 # m     h       dom     mon     dow     command
   0     0       *       *       SAT     certbot renew
   0     */12    *       *       *       /home/username/wordpress-backup.sh
@@ -60,3 +60,25 @@ This is used to enable a simple operating-system firewall. This enables SSH and 
 This is a script I've built up over time that updates/upgrades the current Debian-based distribution to all of the latest software. This patches the current machine, and removes any cache or unneeded packages on the system.
 
 > NOTE: If you install `neofetch` (for an OS ASCII graphic) and `figlet` for large text on the screen, you'll get a more visually interesting output.
+
+## Script: `update-batch.sh`
+
+This is a non-interactive version of the `update.sh` from above. Instead of interactively prompting you to reboot if a reboot is required, this will reboot automatically.
+
+This script is best run via a cron job. Use the following to edit the cron schedule:
+
+```bash
+crontab -e
+```
+
+Then, add a line like this to have this run every day at 8am:
+
+```crontab
+  0     8       *       *       *       /root/update-batch.sh > /root/update-batch_lastrun.log 2>&1
+```
+
+To use a different schedule, use a website like:
+
+> https://crontab.guru
+
+To get the correct parameters for a different schedule.
