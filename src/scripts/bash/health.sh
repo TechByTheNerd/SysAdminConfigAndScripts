@@ -3,7 +3,9 @@
 echo ""
 echo "Health report for: ${HOSTNAME}"
 echo ""
-date
+DATE=`date`
+UPTIME=`uptime -p`
+echo "$DATE (Uptime: $UPTIME)"
 echo "----------------------------------------------------------------------"
 echo ""
 echo "DISK"
