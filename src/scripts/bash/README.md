@@ -6,9 +6,61 @@ This is an overview of the scripts in this folder.
 
 Below is a summary of each script and how to use them.
 
+## Script: `backup_additive.sh`
+
+This is a script that just backs up up the folders that you definitely need. For example, if you have a web server, you might just backup:
+
+- `/etc/`
+- `/var/www/`
+- `/var/spool/cron`
+
+So, when you need to restore, you would:
+
+1. Start from a fresh VM.
+2. Install the needed software.
+3. Restore the directories that were backed-up.
+
+**NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
+
+This may be fine in some scenarios, but you much test your restores to make sure that you are capturing everything that you need. You could run this, and capture all of the `stderr` and `stdout` with something like this:
+
+```bash
+./backup_additive.sh > ~/backup_`date +%Y.%m.%d.%H.%M.%S`.log 2>&1
+```
+That results in a filename like this: `backup_2021.10.09.21.28.23.log`.
+
+## Script: `backup_subtractive.sh`
+
+This is a script that backups the entire `/` file system, except where folders were explicitly excluded. Luckily, there are [some good examples](https://help.ubuntu.com/community/BackupYourSystem/TAR#Alternate_backup) of directories to exclude, for example:
+
+- `/proc`
+- `/tmp`
+- `/mnt`
+- `/dev`
+- `/sys`
+- `/run`
+- `/media`
+- `/log`
+- `/var/cache/apt/archives`
+- `/usr/src/linux-headers*`
+- `/home/*/.gvfs`
+- `/home/*/.cache`
+- `/home/*/.local/share/Trash`
+
+In this scenario you'd always to exclude your *previous* backups, and any "noise* that is specific to your setup.
+
+**NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
+
+You could run this, and capture all of the `stderr` and `stdout` with something like this:
+
+```bash
+./backup_subtractive.sh > ~/backup_`date +%Y.%m.%d.%H.%M.%S`.log 2>&1
+```
+That results in a filename like this: `backup_2021.10.09.21.28.23.log`.
+
 ## Script: `backup_apache-wp-mysql.sh`
 
-This is a custom script that:
+This is a custom script that was used in a specific environment where it stages all of the key files, and then tars, zips, and encrypts the folder:
 
 - Wipes and sets up a working area.
 - Backs up MySQL with `mysqldump --all-databases` command.
