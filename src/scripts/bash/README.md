@@ -109,7 +109,7 @@ This is used to enable a simple Intrusion Prevention System (IPS). This monitors
 
 This is used to enable a simple operating-system firewall. This enables SSH and web server ports (port 80 for http, and 443 for SSL). Please note that the line to turn on the firewall is commented out. 
 
-> ** ⚠️ WARNING:**
+> **⚠️ WARNING:**
 > ---
 > You really need to make sure you have all of these settings correct, or else you will be locked out of your own server. For example, if you run SSH on a different port, like port `2222`, then you'd need an incoming `allow` for `2222/tcp`.
 
@@ -117,7 +117,9 @@ This is used to enable a simple operating-system firewall. This enables SSH and 
 
 This is a script I've built up over time that updates/upgrades the current Debian-based distribution to all of the latest software. This patches the current machine, and removes any cache or unneeded packages on the system.
 
-> NOTE: If you install `neofetch` (for an OS ASCII graphic) and `figlet` for large text on the screen, you'll get a more visually interesting output.
+> **ℹ️ NOTE:**
+> ---
+> If you install `neofetch` (for an OS ASCII graphic) and `figlet` for large text on the screen, you'll get a more visually interesting output.
 
 ## Script: `update-batch.sh`
 
@@ -137,6 +139,6 @@ Then, add a line like this to have this run every day at 8am:
 
 To use a different schedule, use a website like:
 
-> https://crontab.guru
+> **https://crontab.guru**
 
 To get the correct parameters for a different schedule.
