@@ -68,7 +68,7 @@ echo -e "${LightPurple}$Name $Version${NC}"
 
 if [ -z "$TIMESTAMP" ];
 then
-    setStatus "ERROR: Must set a \$TIMESTAMP environment variable before running this script. Example:\n\n\t(export TIMESTAMP=\`date +%Y.%m.%d.%H.%M.%S\` && $0)\n" "f"
+    setStatus "ERROR: Must set a \$TIMESTAMP environment variable before running this script. Example:\n\n\t(export TIMESTAMP=`date +%Y.%m.%d.%H.%M.%S` && $0 > /var/log/sysbackups/backup_$TIMESTAMP.log 2>&1)\n" "f"
     exit -3
 fi
 
