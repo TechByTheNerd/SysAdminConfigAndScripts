@@ -93,20 +93,21 @@ then
     echo -e "${NC}"
 fi
 
+backupFolder="/var/sysbackups"
 fileCompressed="backup_`date +%Y.%m.%d.%H.%M.%S`.tar.gz"
 fileEncrypted="${fileCompressed}.gpg"
-totalSteps="5"
+totalSteps="6"
 
 setStatus "Backup starting..." "*"
 
 
 runCommand "STEP 1 of ${totalSteps}: Dumping up all MySQL databases..." " - Done. All MySQL databases dumped to: '/var/lib/mysql/backup_all_databases.sql'."\
-	"mysqldump --all-databases > /var/lib/mysql/backup_all_databases.sql"
+        "mysqldump --all-databases > /var/lib/mysql/backup_all_databases.sql"
 
 runCommand "STEP 2 of ${totalSteps}: Backing up key directories and files..." " - Done."\
-    "cd /
-    tar -cvpzf /var/backup/$fileCompressed \
-    --exclude=/var/backup/$fileCompressed \
+    "cd / ; \
+    tar -cpzf $backupFolder/$fileCompressed \
+    --exclude=$backupFolder/$fileCompressed \
     --exclude=/proc \
     --exclude=/tmp \
     --exclude=/mnt \
@@ -124,12 +125,15 @@ runCommand "STEP 2 of ${totalSteps}: Backing up key directories and files..." " 
     --exclude=/var/www/nc-data /"
 
 runCommand "STEP 3 of ${totalSteps}: Encrypting backup..." " - Done. Backup encrypted: ${fileEncrypted}"\
-	"gpg -c --cipher-algo AES256 --batch --passphrase-file /etc/backups/secret.key /var/backup/$fileCompressed && rm /var/backup/$fileCompressed"
+        "gpg -c --cipher-algo AES256 --batch --passphrase-file /etc/backups/secret.key $backupFolder/$fileCompressed && rm $backupFolder/$fileCompressed"
 
 runCommand "STEP 4 of ${totalSteps}: Remove backups older than 5 days." " - Done."\
-	"find /var/backup/backup_* -mtime +5 -exec rm {} \;"
+        "find $backupFolder/backup_* -mtime +5 -exec rm {} \;"
 
-runCommand "STEP 5 of ${totalSteps}: Clean-up, and stage new backup for offsite copy." "Done staging new backups in '/var/backup/latest/'."\
-	"rm -Rf /var/backup/latest/* ; rm -f /var/lib/mysql/backup_all_databases.sql ; ln -s /var/backup/$fileEncrypted /var/backup/latest/"
+runCommand "STEP 5 of ${totalSteps}: Clean-up, and stage new backup for offsite copy." "Done staging new backups in '$backupFolder/latest/'."\
+        "rm -Rf $backupFolder/latest/* ; rm -f /var/lib/mysql/backup_all_databases.sql ; ln -s $backupFolder/$fileEncrypted $backupFolder/latest/"
+
+runCommand "STEP 6 of ${totalSteps}: Correct backup folder permissions and ownership." "Done."\
+        "chown -R root:backup $backupFolder ; chmod -R 770 $backupFolder"
 
 setStatus "Backup complete." "s"
