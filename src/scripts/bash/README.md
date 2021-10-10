@@ -20,7 +20,8 @@ So, when you need to restore, you would:
 2. Install the needed software.
 3. Restore the directories that were backed-up.
 
-> ### ℹ️ NOTE:
+> **ℹ️ NOTE:**
+> ---
 > This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
 
 This may be fine in some scenarios, but you much test your restores to make sure that you are capturing everything that you need. You could run this, and capture all of the `stderr` and `stdout` with something like this:
@@ -50,7 +51,8 @@ This is a script that backups the entire `/` file system, except where folders w
 
 In this scenario you'd always to exclude your *previous* backups, and any "noise* that is specific to your setup.
 
-> ### ℹ️ NOTE:
+> **ℹ️ NOTE:**
+> ---
 > This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
 
 You could run this, and capture all of the `stderr` and `stdout` with something like this:
@@ -107,7 +109,9 @@ This is used to enable a simple Intrusion Prevention System (IPS). This monitors
 
 This is used to enable a simple operating-system firewall. This enables SSH and web server ports (port 80 for http, and 443 for SSL). Please note that the line to turn on the firewall is commented out. 
 
-> **WARNING:** You really need to make sure you have all of these settings correct, or else you will be locked out of your own server. For example, if you run SSH on a different port, like port `2222`, then you'd need an incoming `allow` for `2222/tcp`.
+> ** ⚠️ WARNING:**
+> ---
+> You really need to make sure you have all of these settings correct, or else you will be locked out of your own server. For example, if you run SSH on a different port, like port `2222`, then you'd need an incoming `allow` for `2222/tcp`.
 
 ## Script: `update.sh`
 
