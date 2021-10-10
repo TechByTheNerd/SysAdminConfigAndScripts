@@ -137,7 +137,10 @@ runCommand "STEP 4 of ${totalSteps}: Remove backups older than 5 days." " - Done
         "find $backupFolder/backup_* -mtime +5 -exec rm {} \;"
 
 runCommand "STEP 5 of ${totalSteps}: Clean-up, and stage new backup for offsite copy." "Done staging new backup as '$backupFolder/backup_latest.tar.gz.gpg'."\
-        "rm $backupFolder/backup_latest.tar.gz.gpg ; rm -f /var/lib/mysql/backup_all_databases.sql ; ln -s $backupFolder/$fileEncrypted $backupFolder/backup_latest.tar.gz.gpg"
+        "rm $backupFolder/backup-*.tar.gz ; \
+         rm $backupFolder/backup_latest.tar.gz.gpg ; \
+         rm -f /var/lib/mysql/backup_all_databases.sql ; \
+         ln -s $backupFolder/$fileEncrypted $backupFolder/backup_latest.tar.gz.gpg"
 
 runCommand "STEP 6 of ${totalSteps}: Correct backup folder permissions and ownership." "Done."\
         "chown -R root:backup $backupFolder ; chmod -R 770 $backupFolder"
