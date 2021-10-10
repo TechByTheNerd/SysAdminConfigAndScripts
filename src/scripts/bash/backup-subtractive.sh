@@ -113,7 +113,7 @@ runCommand "STEP 1 of ${totalSteps}: Dumping up all MySQL databases..." " - Done
 runCommand "STEP 2 of ${totalSteps}: Backing up key directories and files..." " - Done."\
     "cd / ; \
     tar -cpzf $backupFolder/$fileCompressed \
-    --exclude=$backupFolder/$fileCompressed \
+    --exclude=$backupFolder \    
     --exclude=/proc \
     --exclude=/tmp \
     --exclude=/mnt \
@@ -127,7 +127,6 @@ runCommand "STEP 2 of ${totalSteps}: Backing up key directories and files..." " 
     --exclude=/home/*/.gvfs \
     --exclude=/home/*/.cache \
     --exclude=/home/*/.local/share/Trash \
-    --exclude=/var/sysbackup \
     --exclude=/var/www/nc-data /"
 
 runCommand "STEP 3 of ${totalSteps}: Encrypting backup..." " - Done. Backup encrypted: ${fileEncrypted}"\
