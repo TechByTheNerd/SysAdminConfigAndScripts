@@ -20,7 +20,7 @@ So, when you need to restore, you would:
 2. Install the needed software.
 3. Restore the directories that were backed-up.
 
-**NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
+> **NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
 
 This may be fine in some scenarios, but you much test your restores to make sure that you are capturing everything that you need. You could run this, and capture all of the `stderr` and `stdout` with something like this:
 
@@ -49,7 +49,7 @@ This is a script that backups the entire `/` file system, except where folders w
 
 In this scenario you'd always to exclude your *previous* backups, and any "noise* that is specific to your setup.
 
-**NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
+> **NOTE**: This requires a `/etc/backups/secret.key` file. In that file, put a long, random set of characters that will be used for encryption. For example, a 64-character string [from a password generator](https://www.lastpass.com/features/password-generator) will do.
 
 You could run this, and capture all of the `stderr` and `stdout` with something like this:
 
