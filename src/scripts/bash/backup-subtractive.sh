@@ -66,6 +66,12 @@ function runCommand(){
 
 echo -e "${LightPurple}$Name $Version${NC}"
 
+if [ -z "$TIMESTAMP" ];
+then
+    setStatus "ERROR: Must set a \$TIMESTAMP environment variable before running this script. Example:\n\n\t(export TIMESTAMP=\`date +%Y.%m.%d.%H.%M.%S\` && $0)\n" "f"
+    exit -3
+fi
+
 
 if [[ $1 == "?" || $1 == "/?" || $1 == "--help" ]];
 then
@@ -94,7 +100,7 @@ then
 fi
 
 backupFolder="/var/sysbackups"
-fileCompressed="backup_`date +%Y.%m.%d.%H.%M.%S`.tar.gz"
+fileCompressed="backup_$TIMESTAMP.tar.gz"
 fileEncrypted="${fileCompressed}.gpg"
 totalSteps="6"
 
@@ -130,8 +136,8 @@ runCommand "STEP 3 of ${totalSteps}: Encrypting backup..." " - Done. Backup encr
 runCommand "STEP 4 of ${totalSteps}: Remove backups older than 5 days." " - Done."\
         "find $backupFolder/backup_* -mtime +5 -exec rm {} \;"
 
-runCommand "STEP 5 of ${totalSteps}: Clean-up, and stage new backup for offsite copy." "Done staging new backups in '$backupFolder/latest/'."\
-        "rm -Rf $backupFolder/latest/* ; rm -f /var/lib/mysql/backup_all_databases.sql ; ln -s $backupFolder/$fileEncrypted $backupFolder/latest/"
+runCommand "STEP 5 of ${totalSteps}: Clean-up, and stage new backup for offsite copy." "Done staging new backup as '$backupFolder/backup_latest.tar.gz.gpg'."\
+        "rm $backupFolder/backup_latest.tar.gz.gpg ; rm -f /var/lib/mysql/backup_all_databases.sql ; ln -s $backupFolder/$fileEncrypted $backupFolder/backup_latest.tar.gz.gpg"
 
 runCommand "STEP 6 of ${totalSteps}: Correct backup folder permissions and ownership." "Done."\
         "chown -R root:backup $backupFolder ; chmod -R 770 $backupFolder"
