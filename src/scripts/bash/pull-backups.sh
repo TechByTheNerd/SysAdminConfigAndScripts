@@ -88,6 +88,6 @@ setStatus "Pulling all remote backups..." "*"
 runCommand "STEP 1 of ${totalSteps}: Pulling 'docs.bythenerd.com' backup log..." " - Done."\
         "rsync -arvz -e 'ssh -p 20022' --progress operations@docs.bythenerd.com:/var/log/sysbackups/* $backupRootFolder/docs.bythenerd.com/"
 runCommand "STEP 2 of ${totalSteps}: Pulling 'docs.bythenerd.com' backup..." " - Done."\
-        "rsync -arvz -e 'ssh -p 20022' --progress operations@docs.bythenerd.com:/var/sysbackups/*.gpg $backupRootFolder/docs.bythenerd.com/"
+        "rsync -arvz -e 'ssh -p 20022' --progress operations@docs.bythenerd.com:/var/sysbackups/backup_2*.gpg $backupRootFolder/docs.bythenerd.com/"
 
 setStatus "Backup complete." "s"
