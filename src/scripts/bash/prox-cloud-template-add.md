@@ -253,7 +253,7 @@ I have 4 proxmox servers. here's what I ran (with some details changed) to set u
 
 I was initially inspired by this TechnoTim video:
 
-> [![](https://www.youtube.com/watch?v=shiIi38cJe4)](https://www.youtube.com/watch?v=shiIi38cJe4)
+> **[https://www.youtube.com/watch?v=shiIi38cJe4](https://www.youtube.com/watch?v=shiIi38cJe4)**
 
 I basically built-out a single script that does these things, and few other steps. This page from the ProxMox documentation was very helpful too:
 
