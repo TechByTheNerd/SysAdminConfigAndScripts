@@ -266,8 +266,8 @@ else
     exit -1
 fi
 
-setStatus "STEP 8: Retrieve SSH keys from LaunchPad..."
-if wget https://launchpad.net/~rogsend/+sshkeys -O ./keys ; then
+setStatus "STEP 8: Retrieve SSH keys from LaunchPad for: ${LAUNCHPAD_ID}..."
+if wget https://launchpad.net/~${LAUNCHPAD_ID}/+sshkeys -O ./keys ; then
     setStatus " - Success." "s"
 else
     setStatus " - Error completing step." "f"

@@ -6,6 +6,10 @@ This is an overview of the scripts in this folder.
 
 Below is a summary of each script and how to use them.
 
+## Script: `prox-cloud-template.add.sh`
+
+This has a [seperate page that goes into detail about that script](./prox-cloud-template-add.md).
+
 ## Script: `backup_additive.sh`
 
 This is a script that just backs up up the folders that you definitely need. For example, if you have a web server, you might just backup:
