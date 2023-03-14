@@ -9,3 +9,6 @@ do
   fail2ban-client status $JAIL
   ((INDEX++))
 done
+echo ""
+echo "$(find /var/log/syslog -type f -mtime -1 -exec grep "UFW BLOCK" {} \; | wc -l) blocks in the past 24 hours."
+echo ""
