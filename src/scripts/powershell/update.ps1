@@ -2,7 +2,7 @@
 # - `winget` Installed by default in Windows 11.
 # - `choco` Install Chocolatey from chocolatey.org. `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
 # - `winfetch` Install using Chocolatey (`choco install winfetch`).
-# - `figlet` Install using Chocolatey (`choco install figlet`).
+# - `figlet` Install using Chocolatey (`choco install figlet-go`).
 # - Windows Update Module: Install PSWindowsUpdate module with: `Install-Module -Name PSWindowsUpdate -Force`
 
 # Color Definitions
